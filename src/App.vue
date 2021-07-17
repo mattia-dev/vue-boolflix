@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <Main />
+    <Main :movies="results"/>
   </div>
 </template>
 
@@ -18,408 +18,267 @@ export default {
   data() {
     return {
       "page": 1,
-      "results": [
-        {
-          "adult": false,
-          "backdrop_path": "/yizL4cEKsVvl17Wc1mGEIrQtM2F.jpg",
-          "genre_ids": [
-              28,
-              878
-          ],
-          "id": 588228,
-          "original_language": "en",
-          "original_title": "The Tomorrow War",
-          "overview": "The world is stunned when a group of time travelers arrive from the year 2051 to deliver an urgent message: Thirty years in the future, mankind is losing a global war against a deadly alien species. The only hope for survival is for soldiers and civilians from the present to be transported to the future and join the fight. Among those recruited is high school teacher and family man Dan Forester. Determined to save the world for his young daughter, Dan teams up with a brilliant scientist and his estranged father in a desperate quest to rewrite the fate of the planet.",
-          "popularity": 4299.876,
-          "poster_path": "/34nDCQZwaEvsy4CFO5hkGRFDCVU.jpg",
-          "release_date": "2021-06-30",
-          "title": "The Tomorrow War",
-          "video": false,
-          "vote_average": 8.3,
-          "vote_count": 2405
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/lmZFxXgJE3vgrciwuDib0N8CfQo.jpg",
-          "genre_ids": [
-              12,
-              28,
-              878
-          ],
-          "id": 299536,
-          "original_language": "en",
-          "original_title": "Avengers: Infinity War",
-          "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
-          "popularity": 337.939,
-          "poster_path": "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-          "release_date": "2018-04-25",
-          "title": "Avengers: Infinity War",
-          "video": false,
-          "vote_average": 8.3,
-          "vote_count": 22191
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/8LHSDyRizQ4kQz5rEHPKyXPvMG3.jpg",
-          "genre_ids": [
-              16,
-              10752,
-              878
-          ],
-          "id": 736069,
-          "original_language": "en",
-          "original_title": "Justice Society: World War II",
-          "overview": "When the Flash finds himself dropped into the middle of World War II, he joins forces with Wonder Woman and her top-secret team known as the Justice Society of America.",
-          "popularity": 276.46,
-          "poster_path": "/e4REOC6CZW8J6FslA4nRvdQXFXR.jpg",
-          "release_date": "2021-04-27",
-          "title": "Justice Society: World War II",
-          "video": false,
-          "vote_average": 7.8,
-          "vote_count": 273
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/ebaQIQ0Uj60Rb9qcXaz0wF5B77I.jpg",
-          "genre_ids": [
-              36,
-              14,
-              18
-          ],
-          "id": 584044,
-          "original_language": "en",
-          "original_title": "The Viking War",
-          "overview": "Ingrid and her siblings are on the run from the Beserkers who have begun invading the villages, taking over, savagely using the residents on a game where they vs a Beserker, and if they win, they get to survive - only, no one ever wins. The siblings are trying to escape the Beserkers after they violently murdered and took over their town. However, the Beserkers are on their trail, and want to put them in the game.",
-          "popularity": 101.923,
-          "poster_path": "/7BEY3dAb6ZVHzND1Ewmw2PTAl76.jpg",
-          "release_date": "2019-10-15",
-          "title": "The Viking War",
-          "video": false,
-          "vote_average": 5.4,
-          "vote_count": 24
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/kvRT3GwcnqGHzPjXIVrVPhUix7Z.jpg",
-          "genre_ids": [
-              12,
-              28,
-              878
-          ],
-          "id": 271110,
-          "original_language": "en",
-          "original_title": "Captain America: Civil War",
-          "overview": "Following the events of Age of Ultron, the collective governments of the world pass an act designed to regulate all superhuman activity. This polarizes opinion amongst the Avengers, causing two factions to side with Iron Man or Captain America, which causes an epic battle between former allies.",
-          "popularity": 111.776,
-          "poster_path": "/rAGiXaUfPzY7CDEyNKUofk3Kw2e.jpg",
-          "release_date": "2016-04-27",
-          "title": "Captain America: Civil War",
-          "video": false,
-          "vote_average": 7.4,
-          "vote_count": 18289
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/upsk7nfUjf8ZSYuokwa5U5YXERm.jpg",
-          "genre_ids": [
-              28,
-              18,
-              27,
-              878,
-              53
-          ],
-          "id": 72190,
-          "original_language": "en",
-          "original_title": "World War Z",
-          "overview": "Life for former United Nations investigator Gerry Lane and his family seems content. Suddenly, the world is plagued by a mysterious infection turning whole human populations into rampaging mindless zombies. After barely escaping the chaos, Lane is persuaded to go on a mission to investigate this disease. What follows is a perilous trek around the world where Lane must brave horrific dangers and long odds to find answers before human civilization falls.",
-          "popularity": 61.529,
-          "poster_path": "/1SWBSYJsnyhdNRfLI1T6RsCxAQ4.jpg",
-          "release_date": "2013-06-20",
-          "title": "World War Z",
-          "video": false,
-          "vote_average": 6.8,
-          "vote_count": 12146
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/dTFJlBGWSqW6rMiawQidMPxleTd.jpg",
-          "genre_ids": [
-              35,
-              80,
-              18
-          ],
-          "id": 308266,
-          "original_language": "en",
-          "original_title": "War Dogs",
-          "overview": "Based on the true story of two young men, David Packouz and Efraim Diveroli, who won a $300 million contract from the Pentagon to arm America's allies in Afghanistan.",
-          "popularity": 30.437,
-          "poster_path": "/mDcPRjZC1bb6LavFU3gwsWdVfCM.jpg",
-          "release_date": "2016-08-17",
-          "title": "War Dogs",
-          "video": false,
-          "vote_average": 6.9,
-          "vote_count": 3481
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/oCCvZEbqCCcALQtah8HJm9Ja4HT.jpg",
-          "genre_ids": [
-              18,
-              10749
-          ],
-          "id": 323272,
-          "original_language": "en",
-          "original_title": "War Room",
-          "overview": "The family-friendly movie explores the transformational role prayer plays in the lives of the Jordan family. Tony and Elizabeth Jordan, a middle-class couple who seemingly have it all – great jobs, a beautiful daughter, their dream home. But appearances can be deceiving. In reality, the Jordan’s marriage has become a war zone and their daughter is collateral damage. With the help of Miss Clara, an older, wiser woman, Elizabeth discovers she can start fighting for her family instead of against them. Through a newly energized faith, Elizabeth and Tony’s real enemy doesn’t have a prayer.",
-          "popularity": 28.247,
-          "poster_path": "/unxQeVUi5DH01r7ZNvAHwpvX7UK.jpg",
-          "release_date": "2015-08-28",
-          "title": "War Room",
-          "video": false,
-          "vote_average": 7.9,
-          "vote_count": 298
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/3oyA4yN1xv4bwc5bGTfBJAqQDNy.jpg",
-          "genre_ids": [
-              10752,
-              18
-          ],
-          "id": 475132,
-          "original_language": "en",
-          "original_title": "A Private War",
-          "overview": "One of the most celebrated war correspondents of our time, Marie Colvin is an utterly fearless and rebellious spirit, driven to the frontlines of conflicts across the globe to give voice to the voiceless.",
-          "popularity": 43.042,
-          "poster_path": "/pAh6uDR9bBznybiJCVYZNJmjg63.jpg",
-          "release_date": "2018-11-16",
-          "title": "A Private War",
-          "video": false,
-          "vote_average": 6.8,
-          "vote_count": 351
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/v7irtTi2wGS7bgzZimwkDHEOIbY.jpg",
-          "genre_ids": [
-              28,
-              12,
-              18
-          ],
-          "id": 290595,
-          "original_language": "en",
-          "original_title": "The Huntsman: Winter's War",
-          "overview": "As two evil sisters prepare to conquer the land, two renegades—Eric the Huntsman, who aided Snow White in defeating Ravenna in Snowwhite and the Huntsman, and his forbidden lover, Sara—set out to stop them.",
-          "popularity": 30.691,
-          "poster_path": "/ci1QXfBSUBVpLuzxi9A208uwUVi.jpg",
-          "release_date": "2016-04-06",
-          "title": "The Huntsman: Winter's War",
-          "video": false,
-          "vote_average": 6.3,
-          "vote_count": 3937
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/z5LhR3cqKIL0atMcNd16s4IP2kQ.jpg",
-          "genre_ids": [
-              80,
-              18,
-              53
-          ],
-          "id": 1830,
-          "original_language": "en",
-          "original_title": "Lord of War",
-          "overview": "Yuri Orlov is a globetrotting arms dealer and, through some of the deadliest war zones, he struggles to stay one step ahead of a relentless Interpol agent, his business rivals and even some of his customers who include many of the world's most notorious dictators. Finally, he must also face his own conscience.",
-          "popularity": 27.244,
-          "poster_path": "/xEdwdFZRwrNAvTDx0fAV3MAInaA.jpg",
-          "release_date": "2005-09-16",
-          "title": "Lord of War",
-          "video": false,
-          "vote_average": 7.3,
-          "vote_count": 3333
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/64YOcrslrijllDRCpQvXkSKvXQV.jpg",
-          "genre_ids": [
-              18,
-              10752,
-              28
-          ],
-          "id": 57212,
-          "original_language": "en",
-          "original_title": "War Horse",
-          "overview": "Follows a young man named Albert and his horse, Joey, and how their bond is broken when Joey is sold to the cavalry and sent to the trenches of World War One. Despite being too young to enlist, Albert heads to France to save his friend.",
-          "popularity": 19.87,
-          "poster_path": "/7KHz6JlJhrFAPesmUkgdnLrSr8Y.jpg",
-          "release_date": "2011-12-25",
-          "title": "War Horse",
-          "video": false,
-          "vote_average": 7.3,
-          "vote_count": 2619
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/1kBFmH1QdduqwyU5nhw8mH6sF7y.jpg",
-          "genre_ids": [
-              16,
-              28
-          ],
-          "id": 217993,
-          "original_language": "en",
-          "original_title": "Justice League: War",
-          "overview": "The world is under attack by an alien armada led by the powerful Apokoliptian, Darkseid. A group of superheroes consisting of Superman, Batman, Wonder Woman, The Flash, Green Lantern, Cyborg, and Shazam must set aside their differences and gather together to defend Earth.",
-          "popularity": 26.381,
-          "poster_path": "/eu6zEhpt9QVgZk8T4FJCwKCbJkq.jpg",
-          "release_date": "2014-02-02",
-          "title": "Justice League: War",
-          "video": false,
-          "vote_average": 7.5,
-          "vote_count": 738
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/n7vA2SiG8YQGOZt2WYzgNdHsfC3.jpg",
-          "genre_ids": [
-              28,
-              53
-          ],
-          "id": 10431,
-          "original_language": "en",
-          "original_title": "War",
-          "overview": "FBI agent Jack Crawford is out for revenge when his partner is killed and all clues point to the mysterious assassin Rogue. But when Rogue turns up years later to take care of some unfinished business, he triggers a violent clash of rival gangs. Will the truth come out before it's too late? And when the dust settles, who will remain standing?",
-          "popularity": 12.604,
-          "poster_path": "/pBwU58L6qR4dwbFSJSWXIeDGePp.jpg",
-          "release_date": "2007-08-24",
-          "title": "War",
-          "video": false,
-          "vote_average": 6.3,
-          "vote_count": 1176
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/8LI4OEQGY2DIBTQQeRjYVKfL9Dl.jpg",
-          "genre_ids": [
-              27,
-              53,
-              10752,
-              14
-          ],
-          "id": 608195,
-          "original_language": "en",
-          "original_title": "Ghosts of War",
-          "overview": "A group of World War II American soldiers encounter a supernatural enemy as they occupy a French castle previously under Nazi control.",
-          "popularity": 24.845,
-          "poster_path": "/jBeL6pPUPo0wnyTmiuxPegcibPf.jpg",
-          "release_date": "2020-07-03",
-          "title": "Ghosts of War",
-          "video": false,
-          "vote_average": 6,
-          "vote_count": 229
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/vwCc9PP6xkSjnYsSl9lzTABhexe.jpg",
-          "genre_ids": [
-              12,
-              53,
-              878
-          ],
-          "id": 74,
-          "original_language": "en",
-          "original_title": "War of the Worlds",
-          "overview": "Ray Ferrier is a divorced dockworker and less-than-perfect father. Soon after his ex-wife and her new husband drop off his teenage son and young daughter for a rare weekend visit, a strange and powerful lightning storm touches down.",
-          "popularity": 33.984,
-          "poster_path": "/6Biy7R9LfumYshur3YKhpj56MpB.jpg",
-          "release_date": "2005-06-28",
-          "title": "War of the Worlds",
-          "video": false,
-          "vote_average": 6.5,
-          "vote_count": 6305
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/sQkRiQo3nLrQYMXZodDjNUJKHZV.jpg",
-          "genre_ids": [
-              16,
-              28,
-              12,
-              14,
-              878
-          ],
-          "id": 618344,
-          "original_language": "en",
-          "original_title": "Justice League Dark: Apokolips War",
-          "overview": "Earth is decimated after intergalactic tyrant Darkseid has devastated the Justice League in a poorly executed war by the DC Super Heroes. Now the remaining bastions of good – the Justice League, Teen Titans, Suicide Squad and assorted others – must regroup, strategize and take the war to Darkseid in order to save the planet and its surviving inhabitants.",
-          "popularity": 41.609,
-          "poster_path": "/c01Y4suApJ1Wic2xLmaq1QYcfoZ.jpg",
-          "release_date": "2020-05-05",
-          "title": "Justice League Dark: Apokolips War",
-          "video": false,
-          "vote_average": 8.4,
-          "vote_count": 1003
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/z9BwMdHqKhVhRi2s5BcihGiqWWZ.jpg",
-          "genre_ids": [
-              18,
-              10752
-          ],
-          "id": 10592,
-          "original_language": "en",
-          "original_title": "Hart's War",
-          "overview": "Fourth-generation Army Col. William McNamara is imprisoned in a brutal German POW camp. Still, as the senior-ranking American officer, he commands his fellow inmates, keeping a sense of honor alive in a place where honor is easy to destroy, all under the dangerous eye of the Luftwafe vetran Col. Wilhelm Visser. Never giving up the fight to win the war, McNamara is silently planning, waiting for his moment to strike back at the enemy. A murder in the camp gives him the chance to set a risky plan in motion. With a court martial to keep Visser and the Germans distracted, McNamara orchestrates a cunning scheme to escape and destroy a nearby munitions plant, enlisting the unwitting help of young Lt. Tommy Hart. Together with his men, McNamara uses a hero's resolve to carry out his mission, ultimately forced to weigh the value of his life against the good of his country.",
-          "popularity": 10.081,
-          "poster_path": "/yRUhSU7vzs5ePa72LNPcKKCCMZ5.jpg",
-          "release_date": "2002-02-15",
-          "title": "Hart's War",
-          "video": false,
-          "vote_average": 6.3,
-          "vote_count": 670
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/zmnSIyqMB9jG0QqTDJbJxUDgROt.jpg",
-          "genre_ids": [
-              28,
-              80
-          ],
-          "id": 13056,
-          "original_language": "en",
-          "original_title": "Punisher: War Zone",
-          "overview": "Waging his one-man war on the world of organized crime, ruthless vigilante-hero Frank Castle sets his sights on overeager mob boss Billy Russoti. After Russoti is left horribly disfigured by Castle, he sets out for vengeance under his new alias: Jigsaw. With the \"Punisher Task Force\" hot on his trail and the FBI unable to take Jigsaw in, Frank must stand up to the formidable army that Jigsaw has recruited before more of his evil deeds go unpunished.",
-          "popularity": 18.602,
-          "poster_path": "/oOvKJgYUIpfswGHAdW6159bPbvM.jpg",
-          "release_date": "2008-12-05",
-          "title": "Punisher: War Zone",
-          "video": false,
-          "vote_average": 5.7,
-          "vote_count": 777
-        },
-        {
-          "adult": false,
-          "backdrop_path": "/a9jZrU7LJk6mAUjmkbEmTiC52l0.jpg",
-          "genre_ids": [
-              35,
-              10751,
-              18
-          ],
-          "id": 425001,
-          "original_language": "en",
-          "original_title": "The War with Grandpa",
-          "overview": "Peter is thrilled that his Grandpa is coming to live with his family. That is, until Grandpa moves into Peter's room, forcing him upstairs into the creepy attic. And though he loves his Grandpa, he wants his room back - so he has no choice but to declare war.",
-          "popularity": 23.177,
-          "poster_path": "/ltyARDw2EFXZ2H2ERnlEctXPioP.jpg",
-          "release_date": "2020-08-27",
-          "title": "The War with Grandpa",
-          "video": false,
-          "vote_average": 6.4,
-          "vote_count": 575
-        }
-      ],
-      "total_pages": 260,
-      "total_results": 5189
+    "results": [
+      {
+        "adult": false,
+        "backdrop_path": "/AcZjBskxs7NioQOVj6DQaMbet34.jpg",
+        "genre_ids": [
+          27,
+          878
+        ],
+        "id": 48311,
+        "original_language": "en",
+        "original_title": "Parasite",
+        "overview": "Paul Dean has created a deadly parasite that is now attached to his stomach. He and his female companion, Patricia Welles, must find a way to destroy it while also trying to avoid Ricus, his rednecks, and an evil government agent named Merchant.",
+        "popularity": 5.082,
+        "poster_path": "/6EM7Jm3veKSW9ELMajSSxslYWDa.jpg",
+        "release_date": "1982-03-12",
+        "title": "Parasite",
+        "video": false,
+        "vote_average": 4.8,
+        "vote_count": 35
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [
+          27
+        ],
+        "id": 291545,
+        "original_language": "en",
+        "original_title": "Parasite",
+        "overview": "An abandoned oil rig in the middle of the North Sea. Dr. Christine Hansen is charged with the task of testing an experimental cleaning fluid which could revolutionize the oil industry. Hired to carry out the tests is Jacob Rasmussen and his rough and ready crew of deconstruction engineers. But within hours one of them is missing under suspicious circumstances. Things go from bad to worse when environmental activist Mickey Hennessey and his hard-bitten associates seize control of the rig, taking everybody on board hostage. But very soon oil workers and environmentalists will be compelled to join forces in an evolutionary battle for survival. For a savage new life-form has made its home on the rig. And it is hungry.",
+        "popularity": 1.705,
+        "poster_path": "/lDsUWvTHbSsI62u63S8B6Jjgztb.jpg",
+        "release_date": "2004-01-01",
+        "title": "Parasite",
+        "video": false,
+        "vote_average": 5.6,
+        "vote_count": 12
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
+        "genre_ids": [
+          35,
+          53,
+          18
+        ],
+        "id": 496243,
+        "original_language": "ko",
+        "original_title": "기생충",
+        "overview": "All unemployed, Ki-taek's family takes peculiar interest in the wealthy and glamorous Parks for their livelihood until they get entangled in an unexpected incident.",
+        "popularity": 104.151,
+        "poster_path": "/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+        "release_date": "2019-05-30",
+        "title": "Parasite",
+        "video": false,
+        "vote_average": 8.5,
+        "vote_count": 11719
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [],
+        "id": 629162,
+        "original_language": "en",
+        "original_title": "Parasite",
+        "overview": "Wherever there is human development, somewhere nature is getting the shorter end of the stick. Every time someone struggles to rise, another barren spot is left behind. Grabbing hands struggle to grasp the beauty that exists in the world. Darkness is always on the other side.",
+        "popularity": 0.6,
+        "poster_path": "/i81BSTjXnrozgR3oTmAD8JueC0N.jpg",
+        "release_date": "",
+        "title": "Parasite",
+        "video": false,
+        "vote_average": 10,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [
+          27
+        ],
+        "id": 671137,
+        "original_language": "en",
+        "original_title": "Parasite",
+        "overview": "Young couple gets together with friends for a barbeque, but something in the sink has other plans for tonight...",
+        "popularity": 0.6,
+        "poster_path": "/pAjExpwZRibYxkRadqd3WdpsLB.jpg",
+        "release_date": "2015-08-13",
+        "title": "Parasite",
+        "video": false,
+        "vote_average": 3.5,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/6uJoEILU61tIzOXRPkC3Rn6bxC3.jpg",
+        "genre_ids": [
+          27,
+          10749
+        ],
+        "id": 540545,
+        "original_language": "en",
+        "original_title": "The Parasite",
+        "overview": "A young couple is terrorized by a seductive psychic woman. A David Lynch Master's in Film thesis, based on the novelette by Sir Arthur Conan Doyle.",
+        "popularity": 0.664,
+        "poster_path": "/k6XRlpuSLQjeKfik4tP1vyUhtVb.jpg",
+        "release_date": "2015-11-21",
+        "title": "The Parasite",
+        "video": false,
+        "vote_average": 8,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [],
+        "id": 227625,
+        "original_language": "en",
+        "original_title": "The Parasite",
+        "overview": "A skeptical professor falls under the spell of a powerful hypnotist.",
+        "popularity": 0.6,
+        "poster_path": "/yMMm5KcfV3WaPmWLgABZDXdMcL2.jpg",
+        "release_date": "1997-01-01",
+        "title": "The Parasite",
+        "video": false,
+        "vote_average": 5,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/wYWNrUfYftKA4Z8xPcmzo90VXUt.jpg",
+        "genre_ids": [
+          878
+        ],
+        "id": 825440,
+        "original_language": "en",
+        "original_title": "The Parasite",
+        "overview": "A parasite in a plastic world escapes from its containment field into a futuristic Legoland.",
+        "popularity": 0.6,
+        "poster_path": "/iWbQejWicvqb37ZqrjmAXssjGc9.jpg",
+        "release_date": "1994-03-10",
+        "title": "The Parasite",
+        "video": false,
+        "vote_average": 0,
+        "vote_count": 0
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [],
+        "id": 830270,
+        "original_language": "en",
+        "original_title": "Alien Parasite",
+        "overview": "After an alien spaceship crash-lands in the middle of the desert, the town starts to fall victim to a parasite that is spreading faster than it can be contained, turning the residents into deadly killing machines. Soon the town must fight back and face something out of this world before it.",
+        "popularity": 0.6,
+        "poster_path": "/hV1U3mXhSODBZmX1sldiKqVcw7e.jpg",
+        "release_date": "2020-08-17",
+        "title": "Alien Parasite",
+        "video": false,
+        "vote_average": 6,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": null,
+        "genre_ids": [],
+        "id": 404280,
+        "original_language": "en",
+        "original_title": "Parasite Memories: The Making of 'Shivers'",
+        "overview": "\"Parasite Memories\" is a brand new retrospective piece on the film produced by High Rising Productions with lively contribution from effects artist Joe Blasco, actresses Lynn Lowry and Barbara Steele, actor Allan Kolman, and Canadian critic Kier La-Janisse.",
+        "popularity": 0.6,
+        "poster_path": "/AmOcdupFtwrZnkdLoZgYWT2gIcS.jpg",
+        "release_date": "2014-10-13",
+        "title": "Parasite Memories: The Making of 'Shivers'",
+        "video": false,
+        "vote_average": 5.5,
+        "vote_count": 1
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/irMPnAiYRb6Ku4jdnRjQG5g6cqO.jpg",
+        "genre_ids": [
+          878,
+          53
+        ],
+        "id": 252944,
+        "original_language": "ja",
+        "original_title": "寄性獣医・鈴音 EVOLUTION",
+        "overview": "Set within a city where parasites rage, the parasites settled into their human hosts and increases their power and sexual desires. Dr. Suzune is a parasite expert who works daily to kill the parasites. A sinister demon organization exists behind the parasites. Dr. Suzune also realizes that her father, who went missing when she was a young child, is somehow connected with the group. Violence and madness awaits for her ...",
+        "popularity": 2.863,
+        "poster_path": "/jVuUlrigERm896IMxSDhDrPcl23.jpg",
+        "release_date": "2011-12-04",
+        "title": "The Parasite Doctor Suzune: Evolution",
+        "video": false,
+        "vote_average": 3,
+        "vote_count": 3
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/oDHhUBssn28vQwSmdrMerfriaOh.jpg",
+        "genre_ids": [
+          28,
+          16,
+          878,
+          53
+        ],
+        "id": 80089,
+        "original_language": "ja",
+        "original_title": "パラサイトドールズ",
+        "overview": "Beauty is only skin deep, but when you can’t see beneath the skin, how can you know what you’re really dealing with? In a world where perfect androids called Boomers have infiltrated every aspect of society, it’s the job of Branch to maintain peace between the people and the plastic. Unfortunately, not all boomers are created perfect, and when boomers go bad, people die. The thin blue line that separates man from machine is about to meet its most horrifying test in Parasite Dolls.",
+        "popularity": 3.471,
+        "poster_path": "/bCDVdpjhqbfMsSg0TlNeGMdg2el.jpg",
+        "release_date": "2003-05-22",
+        "title": "Parasite Dolls",
+        "video": false,
+        "vote_average": 5.6,
+        "vote_count": 19
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/ynYT4ohuJnbkYdb1OYmvD5AiG3A.jpg",
+        "genre_ids": [
+          10749,
+          27,
+          878,
+          53,
+          18
+        ],
+        "id": 33045,
+        "original_language": "ja",
+        "original_title": "パラサイト・イヴ",
+        "overview": "Toshiaki Nagashima is a biologist who is doing major research on mitochondria. When his beautiful young wife is tragically involved in a car accident which leaves her brain dead, in desperation he steals her liver from her body in order to recieve the mitochondria from it to resurrect his wife from the dead. The killer mitochondria takes the form of his assistant.",
+        "popularity": 2.212,
+        "poster_path": "/dzQ2VhOLr7UgktlXR4SFTH4VQev.jpg",
+        "release_date": "1997-02-01",
+        "title": "Parasite Eve",
+        "video": false,
+        "vote_average": 6.3,
+        "vote_count": 15
+      },
+      {
+        "adult": false,
+        "backdrop_path": "/aXT34YFLNYAmqfwupO5TjILucTN.jpg",
+        "genre_ids": [
+          53,
+          878
+        ],
+        "id": 260015,
+        "original_language": "ja",
+        "original_title": "寄性獣医・鈴音 GENESIS",
+        "overview": "The city is infested with mysterious parasites that bore into their human hosts to increase their host's power and sexual desires. A beautiful girl, Suzune Arizono is a vet with a specialty in parasites, and who fights daily to end the plague. Before long, she learns that an evil organization, the Kito Zaibatsu, is behind the explosive growth of this ferocious parasite. She also learns that her long-missing father, Dr. Arizono, is also involved. In order to crush the Kito Zaibatsu's ambition and to see her father again, Suzune takes on the fight without regard to the danger involved.",
+        "popularity": 1.425,
+        "poster_path": "/knSucdnqvqmOcj32CjVQwmZNqTV.jpg",
+        "release_date": "2011-11-26",
+        "title": "The Parasite Doctor Suzune: Genesis",
+        "video": false,
+        "vote_average": 4.8,
+        "vote_count": 4
+      }
+    ],
+    "total_pages": 3,
+    "total_results": 47
     }
   }
 }
