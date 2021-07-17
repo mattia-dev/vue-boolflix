@@ -8,9 +8,6 @@
 
 export default {
   name: 'Card',
-  components: {
-    
-  }
 }
 </script>
 
