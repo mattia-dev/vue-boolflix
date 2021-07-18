@@ -9,7 +9,13 @@
                         <div>
                             <div v-if="movie.title !== undefined" class="title">{{movie.title}} - {{movie.original_title}}</div>
                             <div v-if="movie.name !== undefined" class="title">{{movie.name}} - {{movie.original_name}}</div>
-                            <div class="language">Original language: {{movie.original_language}}</div>
+                            <div class="language d-flex justify-content-center align-items-center">
+                                <div>Original language:</div>
+
+                                <div class="flag-container">
+                                    <img :src="require(`../assets/flags/${movie.original_language.toUpperCase()}.png`)" alt="flag">
+                                </div>
+                            </div>
                             <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
                         </div>
                     </div>
@@ -75,9 +81,10 @@ export default {
         } else {
             return `color:#3caea3`;
         }
-    }
+    },
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -148,6 +155,14 @@ export default {
 
             .language {
                 margin: 6px 0;
+
+                .flag-container {
+                    margin-left: 6px;
+                }
+            }
+
+            img {
+                width: 20px;
             }
 
             .rating {
