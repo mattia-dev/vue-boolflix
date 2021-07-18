@@ -16,7 +16,9 @@
     <div class="right-content d-flex">
       <ul class="d-flex align-items-center">
         <li class="d-flex align-items-center">
-          <i class="fas fa-search"></i>
+          <input v-model="searchedMovie" type="text" class="form-control" placeholder="Search movies" @keyup.enter="[$emit('search', searchedMovie), clear()]">
+
+          <div @click="[$emit('search', searchedMovie), clear()]"><i class="fas fa-search"></i></div>
         </li>
 
         <li>BAMBINI</li>
@@ -41,6 +43,16 @@
 
 export default {
   name: 'Header',
+  data() {
+    return {
+      searchedMovie: "",
+    };
+  },
+  methods: {
+    clear: function() {
+      this.searchedMovie = "";
+    }
+  }
 }
 </script>
 
@@ -92,6 +104,10 @@ header {
 
         &:hover {
           color: $text-white;
+        }
+
+        input {
+          margin-right: 8px;
         }
 
         .svg-inline--fa {

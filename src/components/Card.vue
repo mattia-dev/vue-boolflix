@@ -1,16 +1,46 @@
 <template>
-    <div class="card-container">
-        <div class="row flex-nowrap">
-            <div class="movie" v-for="movie in movies" :key="movie.id" :style=createBackground(movie)>
-                <div class="movie-details d-flex justify-content-center align-items-center">
-                    <div>
-                        <div class="title">{{movie.title}} - {{movie.original_title}}</div>
-                        <div class="language">Original language: {{movie.original_language}}</div>
-                        <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
+    <div>
+        <div class="card-container row flex-nowrap" v-for="(moviesList, index) in movies" :key="index">
+            <div class="movie-container col" v-for="movie in movies[index]" :key="movie.id">
+                <div class="movie" :style=createBackground(movie)>
+                    <div class="movie-details d-flex justify-content-center align-items-center">
+                        <div>
+                            <div class="title">{{movie.title}} - {{movie.original_title}}</div>
+                            <div class="language">Original language: {{movie.original_language}}</div>
+                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- <div class="card-container row flex-nowrap">
+            <div class="movie-container col" v-for="movie in movies2" :key="movie.id">
+                <div class="movie" :style=createBackground(movie)>
+                    <div class="movie-details d-flex justify-content-center align-items-center">
+                        <div>
+                            <div class="title">{{movie.title}} - {{movie.original_title}}</div>
+                            <div class="language">Original language: {{movie.original_language}}</div>
+                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container row flex-nowrap">
+            <div class="movie-container col" v-for="movie in movies3" :key="movie.id">
+                <div class="movie" :style=createBackground(movie)>
+                    <div class="movie-details d-flex justify-content-center align-items-center">
+                        <div>
+                            <div class="title">{{movie.title}} - {{movie.original_title}}</div>
+                            <div class="language">Original language: {{movie.original_language}}</div>
+                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </template>
 
@@ -19,7 +49,9 @@
 export default {
   name: 'Card',
   props: {
-    movies: Array
+    movies: Array,
+    // movies2: Array,
+    // movies3: Array
   },
   data() {
     return {
@@ -28,7 +60,11 @@ export default {
   },
   methods: {
     createBackground: function(movie) {
-        return `background-image:url("${this.baseUrl}${movie.poster_path}")`;
+        if (movie.poster_path != null) {
+            return `background-image:url("${this.baseUrl}${movie.poster_path}")`;
+        } else {
+            return "background-color:black";
+        }
     },
     movieRating: function(movie) {
         if (movie.vote_average < 6) {
@@ -49,14 +85,17 @@ export default {
 }
 
 .card-container {
-    padding-left: 12px;
     overflow: auto;
+    padding: 0 6px;
+    margin-bottom: 12px;
+
+    .movie-container {
+        padding: 0 6px;
+    }
 
     .movie {
         height: 500px;
         width: 310px;
-        margin-right: 6px;
-        padding: 0;
         background-size: cover;
         cursor: pointer;
 

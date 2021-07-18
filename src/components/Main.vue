@@ -14,7 +14,9 @@ export default {
     Card
   },
   props: {
-    movies: Array
+    movies: Array,
+    // movies2: Array,
+    // movies3: Array
   },
 }
 </script>
@@ -24,7 +26,7 @@ export default {
 
 main {
     margin-top: 36px;
-    padding-left: 12px;
+    padding: 0 12px;
 
     h2 {
         color: $text-primary;
