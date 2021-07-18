@@ -1,6 +1,7 @@
 <template>
   <main>
-    <h2>ORIGINALI NETFLIX</h2>
+    <h2 v-if="searchedMovie.trim().length == 0">Most popoular of the week</h2>
+    <h2 v-if="searchedMovie.trim().length > 0">Results for: "{{searchedMovie.trim()}}"</h2>
     <Card :movies="movies" />
   </main>
 </template>
@@ -14,6 +15,7 @@ export default {
     Card
   },
   props: {
+    searchedMovie: String,
     movies: Array,
     // movies2: Array,
     // movies3: Array
@@ -29,8 +31,7 @@ main {
     padding: 0 12px;
 
     h2 {
-        color: $text-primary;
-        margin-bottom: 18px;
+      color: $text-primary;
     }
 }
 </style>
