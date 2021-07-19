@@ -7,16 +7,19 @@
                     <div class="movie-details d-flex justify-content-center align-items-center">
                         <div>
                             <div class="media-type">{{mediaType(movie)}}</div>
-                            <div v-if="movie.title !== undefined" class="title">{{movie.title}} - {{movie.original_title}}</div>
-                            <div v-if="movie.name !== undefined" class="title">{{movie.name}} - {{movie.original_name}}</div>
-                            <div class="language d-flex justify-content-center align-items-center">
-                                <div>Original language:</div>
 
+                            <div class="language d-flex justify-content-center align-items-center">
                                 <div class="flag-container">
                                     <img :src="require(`../assets/flags/${movie.original_language.toUpperCase()}.png`)" alt="flag">
                                 </div>
                             </div>
-                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
+
+                            <div v-if="movie.title !== undefined" class="title">{{movie.title}} - <span class="original-title">{{movie.original_title}}</span></div>
+                            <div v-if="movie.name !== undefined" class="title">{{movie.name}} - <span class="original-title">{{movie.original_name}}</span></div>
+
+                            <div class="rating">
+                                <i v-for="(star, index) in movieRating(movie)" :key="index" :class="star"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,11 +86,16 @@ export default {
         }
     },
     movieRating: function(movie) {
-        if (movie.vote_average < 6) {
-            return `color:#ed553b`;
-        } else {
-            return `color:#3caea3`;
+        let stars = [];
+        let fullStars = Math.ceil(movie.vote_average / 2);
+        for (let i = 1; i <= 5; i++) {
+            if (i <= fullStars) {
+                stars.push("fas fa-star");
+            } else {
+                stars.push("far fa-star");
+            }
         }
+        return stars;
     },
     mediaType: function(movie) {
         if (movie.media_type == "movie") {
@@ -122,7 +130,7 @@ export default {
 
     .movie-container {
         padding: 0 6px;
-        transition: transform 500ms;
+        transition: transform .5s;
         position: relative;
 
         &:first-child {
@@ -162,7 +170,7 @@ export default {
         background-size: cover;
         background-position: center;
         cursor: pointer;
-        transition: transform 500ms;
+        transition: transform .5s;
 
         &:hover .movie-details {
             visibility: visible;
@@ -183,14 +191,19 @@ export default {
                 font-size: 28px;
                 font-weight: 500;
                 color: $text-white;
-                margin-bottom: 12px;
+                line-height: 1.25;
+                margin: 6px 0;
+
+                .original-title {
+                    font-size: 24px;
+                    font-style: italic;
+                }
             }
 
             .language {
-                margin: 6px 0;
+                margin-top: 6px;
 
                 .flag-container {
-                    margin-left: 6px;
 
                     img {
                         width: 28px;
@@ -199,9 +212,8 @@ export default {
             }
 
             .rating {
-                span {
-                    font-weight: 500;
-                }
+                color: #f6d55c;
+                margin-top: 8px;
             }
         }
     }
