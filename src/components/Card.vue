@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="main-element">
         <div class="card-container row flex-nowrap">
          <!-- v-for="(moviesList, index) in movies" :key="index" -->
-         
-            <div class="movie-container col" v-for="movie in movies" :key="movie.id">
+            <div class="movie-container col" v-for="movie in moviesAndShows" :key="movie.id">
                 <div class="movie" :style=createBackground(movie)>
                     <div class="movie-details d-flex justify-content-center align-items-center">
                         <div>
+                            <div class="media-type">{{mediaType(movie)}}</div>
                             <div v-if="movie.title !== undefined" class="title">{{movie.title}} - {{movie.original_title}}</div>
                             <div v-if="movie.name !== undefined" class="title">{{movie.name}} - {{movie.original_name}}</div>
                             <div class="language d-flex justify-content-center align-items-center">
@@ -67,6 +67,13 @@ export default {
         "baseUrl": 'https://image.tmdb.org/t/p/original',
     }
   },
+  computed: {
+    moviesAndShows: function () {
+        return this.movies.filter(function (movie) {
+            return movie.original_language !== undefined;
+        })
+    }
+  },
   methods: {
     createBackground: function(movie) {
         if (movie.poster_path != null) {
@@ -82,6 +89,13 @@ export default {
             return `color:#3caea3`;
         }
     },
+    mediaType: function(movie) {
+        if (movie.media_type == "movie") {
+            return "Movie";
+        } else {
+            return "TV Series";
+        }
+    }
   }
 }
 
@@ -94,9 +108,13 @@ export default {
     display: none;
 }
 
+.main-element {
+    padding: 0 12px;
+}
+
 .card-container {
     overflow: auto;
-    padding: 36px 6px;
+    padding: 36px 0;
 
     &:hover .movie-container {
         transform: translateX(-4%);
@@ -106,11 +124,26 @@ export default {
         padding: 0 6px;
         transition: transform 500ms;
         position: relative;
+
+        &:first-child {
+            padding-left: 0;
+        }
   
+        &:last-child {
+            padding-right: 0;
+        }
 
         &:hover {
-        transform: scale(1.08);
-        z-index: 1;
+            transform: scale(1.08);
+            z-index: 1;
+        }
+
+        &:first-child:hover {
+            transform: translateX(4%);
+        }
+
+        &:last-child:hover {
+            transform: translateX(-4%);
         }
 
         &:hover ~ .movie-container {
@@ -158,11 +191,11 @@ export default {
 
                 .flag-container {
                     margin-left: 6px;
-                }
-            }
 
-            img {
-                width: 20px;
+                    img {
+                        width: 28px;
+                    }
+                }
             }
 
             .rating {

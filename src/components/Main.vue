@@ -2,7 +2,7 @@
   <main>
     <h2 v-if="searchedMovie.trim().length == 0">Most popoular of the week</h2>
     <h2 v-if="searchedMovie.trim().length > 0">Results for: "{{searchedMovie.trim()}}"</h2>
-    <Card :movies="movies" />
+    <Card v-if="movies.length > 0" :movies="movies" />
   </main>
 </template>
 

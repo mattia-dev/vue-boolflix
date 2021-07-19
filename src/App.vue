@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <div v-if="moviesList.length == 0" class="spinner-container">
+    <div class="spinner-container" :class="loaderStatus">
       <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
+    </div>
+    <div class="alert-container" :class="alertStatus">
+      <div class="alert">No results for your query.</div>
     </div>
     <Header @search="searchMovie" />
     <Main :movies="moviesList" :searchedMovie="searchedMovie" />
@@ -22,17 +25,21 @@ export default {
   data() {
     return {
       moviesList: [],
-      searchedMovie: ""
+      searchedMovie: "",
+      loaderStatus: "hide",
+      alertStatus: "hide"
     }
   },
   created() {
     // for (let i = 0; i < 3; i++) {
+      this.loaderStatus = "show";
       axios
       .get(
-        "https://api.themoviedb.org/3/trending/all/week?api_key=250bb34c3a8ad3b342c86dd16717b4d8&page=1"
+        "https://api.themoviedb.org/3/trending/all/week?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it"
         //  + (i + 1)
       )
       .then((response) => {
+        this.loaderStatus = "hide";
         this.moviesList = response.data.results;
       });
     // }
@@ -40,17 +47,26 @@ export default {
   methods: {
     searchMovie: function(searchedMovie) {
       if (searchedMovie.trim().length > 0) {
+        this.loaderStatus = "show";
+        this.alertStatus = "hide";
         this.searchedMovie = searchedMovie;
         // for (let i = 0; i < 3; i++) {
           // this.moviesLists[i] = [];
-          this.moviesList = []
+          this.moviesList = [];
+
           axios
           .get(
-            "https://api.themoviedb.org/3/search/movie?api_key=250bb34c3a8ad3b342c86dd16717b4d8&query=" + searchedMovie
+            "https://api.themoviedb.org/3/search/multi?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it&query=" + searchedMovie
             //  + "&page=" + (i + 1)
           )
           .then((response) => {
-            this.moviesList = response.data.results;
+            if (response.data.results.length === 0) {
+              this.loaderStatus = "hide";
+              this.alertStatus = "show";
+            } else {
+              this.loaderStatus = "hide";
+              this.moviesList = response.data.results;
+            }
           });
         // }
       }
