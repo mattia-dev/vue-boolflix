@@ -1,13 +1,7 @@
 <template>
   <div id="app">
-    <div v-if="flagLoader" class="spinner-container">
-      <div class="spinner-border text-light" style="width: 3rem; height: 3rem;" role="status"></div>
-    </div>
-    <div v-if="flagAlert" class="alert-container">
-      <div class="alert">No results for your query.</div>
-    </div>
     <Header @search="searchMovie" />
-    <Main :movies="moviesList" :searchedMovie="searchedMovie" @back="searchMovie" />
+    <Main :movies="moviesList" :searchedMovie="searchedMovie" :flagLoader="flagLoader" :flagAlert="flagAlert" :flagDefault="flagDefault" :flagResults="flagResults" @back="searchMovie" />
   </div>
 </template>
 
@@ -27,7 +21,9 @@ export default {
       moviesList: [],
       searchedMovie: "",
       flagLoader: false,
-      flagAlert: false
+      flagAlert: false,
+      flagDefault: true,
+      flagResults: false
     }
   },
   created() {
@@ -49,7 +45,7 @@ export default {
           `https://api.themoviedb.org/3/${this.searchUrl(searchType)}${searchedElement}`
         )
         .then((response) => {
-          if (response.data.results.length === 0 && response.data.results.length === null) {
+          if (response.data.results.length === 0) {
             this.flagLoader = false;
             this.flagAlert = true;
           } else {
@@ -61,9 +57,13 @@ export default {
     },
     searchUrl: function(searchType) {
       if (searchType == "popular") {
+        this.flagDefault = true;
+        this.flagResults = false;
         return "trending/all/week?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it";
       }
       if (searchType == "multi") {
+        this.flagDefault = false;
+        this.flagResults = true;
         return "search/multi?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it&query=";
       }
     }

@@ -2,31 +2,4 @@
 
 body {
     background-color: $bg-primary;
-
-    .spinner-container {
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 5%;
-    }
-
-    .alert-container {
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top: 5%;
-
-        .alert {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 500;
-            color: $text-white;
-        }
-    }
 }
