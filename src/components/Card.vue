@@ -18,7 +18,7 @@
                             <div v-if="movie.name !== undefined" class="title">{{movie.name}} - <span class="original-title">{{movie.original_name}}</span></div>
 
                             <div class="rating">
-                                <i v-for="(star, index) in movieRating(movie)" :key="index" :class="star"></i>
+                                <i v-for="(star, index) in movieRating(movie)" :key="index" class="fa-star" :class="star"></i>
                             </div>
                         </div>
                     </div>
@@ -87,12 +87,12 @@ export default {
     },
     movieRating: function(movie) {
         let stars = [];
-        let fullStars = Math.ceil(movie.vote_average / 2);
+        let fullStars = Math.round(movie.vote_average / 2);
         for (let i = 1; i <= 5; i++) {
             if (i <= fullStars) {
-                stars.push("fas fa-star");
+                stars.push("fas");
             } else {
-                stars.push("far fa-star");
+                stars.push("far");
             }
         }
         return stars;

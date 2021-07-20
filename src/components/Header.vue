@@ -16,9 +16,9 @@
     <div class="right-content d-flex">
       <ul class="d-flex align-items-center">
         <li class="d-flex align-items-center">
-          <input v-model="searchedMovie" type="text" class="form-control" placeholder="Search movies" @keyup.enter="[$emit('search', searchedMovie), clear()]">
+          <input v-model="searchedMovie" type="text" class="form-control" placeholder="Search movies" @keyup.enter="search()">
 
-          <div @click="[$emit('search', searchedMovie), clear()]"><i class="fas fa-search"></i></div>
+          <div @click="search()"><i class="fas fa-search"></i></div>
         </li>
 
         <li>BAMBINI</li>
@@ -26,7 +26,7 @@
         <li class="d-flex align-items-center position-relative">
           <i class="fas fa-bell"></i>
           
-          <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-danger">1<span class="visually-hidden">unread messages</span></span>
+          <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-danger">1</span>
         </li>
 
         <li class="d-flex align-items-center">
@@ -45,12 +45,18 @@ export default {
   name: 'Header',
   data() {
     return {
+      multi: "multi",
       searchedMovie: "",
     };
   },
   methods: {
-    clear: function() {
-      this.searchedMovie = "";
+    search: function() {
+      if (this.searchedMovie.trim().length !== 0) {
+        this.$emit('search', this.multi, this.searchedMovie);
+        this.searchedMovie = "";
+      } else {
+        this.searchedMovie = "";
+      }
     }
   }
 }
