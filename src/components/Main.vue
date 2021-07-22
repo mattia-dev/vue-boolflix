@@ -1,13 +1,11 @@
 <template>
   <main>
-    <h2 v-if="flagDefault">Most popular of the week</h2>
-
-    <div v-if="flagResults" class="search-result d-flex align-items-center">
-      <div class="arrow-container d-flex align-items-center" @click="$emit('back', popular, searchedElement)">
+    <div class="search-result d-flex align-items-center">
+      <div v-if="flag == 'Results for: '" class="arrow-container d-flex align-items-center" @click="$emit('search', trending, searchedElement)">
         <i class="fas fa-arrow-left"></i>   
       </div>
 
-      <h2>Results for: "{{searchedMovie.trim()}}"</h2>
+      <h2>{{flag}}<span v-if="flag == 'Results for: '">"{{searchedMovie.trim()}}"</span></h2>
     </div>
 
     <div v-if="flagLoader" class="spinner-container">
@@ -37,15 +35,22 @@ export default {
     // movies3: Array
     flagLoader: Boolean,
     flagAlert: Boolean,
-    flagDefault: Boolean,
-    flagResults: Boolean
+    flags: Array
   },
   data() {
     return {
-      popular: "popular",
+      trending: "trending/all/week?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it",
       searchedElement: "",
     };
   },
+  computed: {
+    flag: function () {
+        let flags = this.flags.filter(function (flag) {
+          return flag.status == true;
+        });
+        return flags[0].name;
+    }
+  }
 }
 </script>
 

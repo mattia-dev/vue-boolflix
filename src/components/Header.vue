@@ -4,11 +4,7 @@
       <img src="../assets/netflix-logo.png" alt="boolflix-logo">
 
       <ul class="d-flex align-items-center">
-        <li>Home</li>
-        <li>SerieTV</li>
-        <li>Film</li>
-        <li>Originali</li>
-        <li>Aggiunti di recente</li>
+        <li v-for="searchString in searches" :key="searchString.url" @click="$emit('search', searchString.url, searchedElement)">{{searchString.string}}</li>
         <li>La mia lista</li>
       </ul>
     </div>
@@ -16,7 +12,7 @@
     <div class="right-content d-flex">
       <ul class="d-flex align-items-center">
         <li class="d-flex align-items-center">
-          <input v-model="searchedMovie" type="text" class="form-control" placeholder="Search movies" @keyup.enter="search()">
+          <input v-if="flagInput" v-model="searchedMovie" type="text" autofocus class="form-control" placeholder="Search movies" @keyup.enter="search()">
 
           <div @click="search()"><i class="fas fa-search"></i></div>
         </li>
@@ -43,19 +39,33 @@
 
 export default {
   name: 'Header',
+  props: {
+    searchStrings: Array
+  },
   data() {
     return {
-      multi: "multi",
       searchedMovie: "",
+      flagInput: false,
+      searchedElement: ""
     };
+  },
+  computed: {
+    searches: function () {
+        return this.searchStrings.filter(function (string) {
+          return string.string !== undefined;
+        });
+    }
   },
   methods: {
     search: function() {
-      if (this.searchedMovie.trim().length !== 0) {
-        this.$emit('search', this.multi, this.searchedMovie);
-        this.searchedMovie = "";
-      } else {
-        this.searchedMovie = "";
+      this.flagInput = true;
+      if (this.flagInput) {
+        if (this.searchedMovie.trim().length !== 0) {
+          this.$emit('search', this.multi, this.searchedMovie);
+          this.searchedMovie = "";
+        } else {
+          this.searchedMovie = "";
+        }
       }
     }
   }
@@ -116,7 +126,7 @@ header {
           margin-right: 8px;
         }
 
-        .svg-inline--fa {
+        .fas {
           font-size: 20px;
         }
 
