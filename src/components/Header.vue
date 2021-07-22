@@ -17,7 +17,7 @@
           <div @click="search()"><i class="fas fa-search"></i></div>
         </li>
 
-        <li>BAMBINI</li>
+        <li>KIDS</li>
         
         <li class="d-flex align-items-center position-relative">
           <i class="fas fa-bell"></i>
@@ -46,6 +46,7 @@ export default {
     return {
       searchedMovie: "",
       flagInput: false,
+      multi: "search/multi?api_key=250bb34c3a8ad3b342c86dd16717b4d8&language=it&query=",
       searchedElement: ""
     };
   },

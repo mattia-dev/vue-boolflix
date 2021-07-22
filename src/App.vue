@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @search="searchMovie" :searchStrings="searchStrings" />
-    <Main @search="searchMovie" :movies="moviesList" :searchedMovie="searchedMovie" :flagLoader="flagLoader" :flagAlert="flagAlert" :flags="flags" />
+    <Main @search="searchMovie" :movies="moviesLists" :searchedMovie="searchedMovie" :flagLoader="flagLoader" :flagAlert="flagAlert" :flags="flags" />
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      moviesList: [],
+      moviesLists: [],
       searchedMovie: "",
       flagLoader: false,
       flagAlert: false,
@@ -88,25 +88,24 @@ export default {
   methods: {
     searchMovie: function(searchType, searchedElement) {
       this.flagLoader = true;
+      this.moviesLists = [];
       this.flagAlert = false;  
-      this.moviesList = [];
-      if (searchType == "multi" && searchedElement.trim().length === 0) {
-        this.flagLoader = false;
-        this.flagAlert = true;
-        this.searchedMovie = "";
-      } else {
-        this.searchedMovie = searchedElement;
+      this.searchedMovie = searchedElement;
+      for (let i = 1; i <= 5; i++) {
         axios
         .get(
-          `https://api.themoviedb.org/3/${this.searchUrl(searchType)}${searchedElement}`
+          `https://api.themoviedb.org/3/${this.searchUrl(searchType)}${searchedElement}&page=${i}`
         )
         .then((response) => {
+          this.flagLoader = false;
           if (response.data.results.length === 0) {
-            this.flagLoader = false;
             this.flagAlert = true;
           } else {
-            this.flagLoader = false;
-            this.moviesList = response.data.results;
+            let filteredMovieList = response.data;
+            filteredMovieList.results = response.data.results.filter(function (movie) {
+              return movie.original_language !== undefined;
+            });
+            this.moviesLists.push(filteredMovieList);
           }
         });
       }

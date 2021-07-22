@@ -5,7 +5,7 @@
         <i class="fas fa-arrow-left"></i>   
       </div>
 
-      <h2>{{flag}}<span v-if="flag == 'Results for: '">"{{searchedMovie.trim()}}"</span></h2>
+      <h2>{{flag}}<span v-if="flag == 'Results for: '">"{{searchedMovie}}"</span></h2>
     </div>
 
     <div v-if="flagLoader" class="spinner-container">
@@ -31,8 +31,6 @@ export default {
   props: {
     searchedMovie: String,
     movies: Array,
-    // movies2: Array,
-    // movies3: Array
     flagLoader: Boolean,
     flagAlert: Boolean,
     flags: Array

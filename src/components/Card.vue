@@ -1,8 +1,7 @@
 <template>
     <div class="main-element">
-        <div class="card-container row flex-nowrap">
-         <!-- v-for="(moviesList, index) in movies" :key="index" -->
-            <div class="movie-container col" v-for="movie in moviesAndShows" :key="movie.id">
+        <div v-for="moviesRow in movies" :key="moviesRow.page" class="card-container row flex-nowrap">
+            <div class="movie-container col" v-for="movie in moviesRow.results" :key="movie.id">
                 <div class="movie" :style=createBackground(movie)>
                     <div class="movie-details d-flex justify-content-center align-items-center">
                         <div>
@@ -25,34 +24,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="card-container row flex-nowrap">
-            <div class="movie-container col" v-for="movie in movies2" :key="movie.id">
-                <div class="movie" :style=createBackground(movie)>
-                    <div class="movie-details d-flex justify-content-center align-items-center">
-                        <div>
-                            <div class="title">{{movie.title}} - {{movie.original_title}}</div>
-                            <div class="language">Original language: {{movie.original_language}}</div>
-                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-container row flex-nowrap">
-            <div class="movie-container col" v-for="movie in movies3" :key="movie.id">
-                <div class="movie" :style=createBackground(movie)>
-                    <div class="movie-details d-flex justify-content-center align-items-center">
-                        <div>
-                            <div class="title">{{movie.title}} - {{movie.original_title}}</div>
-                            <div class="language">Original language: {{movie.original_language}}</div>
-                            <div class="rating">Average rating: <span :style=movieRating(movie)>{{movie.vote_average}}</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </template>
 
@@ -62,19 +33,10 @@ export default {
   name: 'Card',
   props: {
     movies: Array,
-    // movies2: Array,
-    // movies3: Array
   },
   data() {
     return {
         "baseUrl": 'https://image.tmdb.org/t/p/original',
-    }
-  },
-  computed: {
-    moviesAndShows: function () {
-        return this.movies.filter(function (movie) {
-            return movie.original_language !== undefined;
-        })
     }
   },
   methods: {
